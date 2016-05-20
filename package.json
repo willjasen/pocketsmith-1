@@ -1,0 +1,25 @@
+{
+  "name": "pocketsmith",
+  "version": "0.0.1",
+  "description": "PocketSmith api wrapper for Node.",
+  "main": "dist/entry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maraisr/pocketsmith.git"
+  },
+  "keywords": [
+    "pocketsmith",
+    "budget",
+    "api",
+    "wrapper"
+  ],
+  "author": "Marais Rossouw <me@maraisr.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maraisr/pocketsmith/issues"
+  },
+  "homepage": "https://github.com/maraisr/pocketsmith#readme"
+}
