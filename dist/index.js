@@ -1,9 +1,10 @@
 "use strict";
+var accounts_1 = require('./accounts');
 var PocketSmith = (function () {
-    function PocketSmith() {
-        console.log("Hello World");
+    function PocketSmith(token) {
+        this.token = token;
+        this.Accounts = new accounts_1.default();
     }
     return PocketSmith;
 }());
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = PocketSmith;
+module.exports = PocketSmith;

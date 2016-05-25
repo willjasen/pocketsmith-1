@@ -1,0 +1,8 @@
+{
+	"name": "pocketsmith",
+	"dependencies": {},
+	"globalDependencies": {
+		"bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
+		"node": "registry:dt/node#6.0.0+20160523035754"
+	}
+}

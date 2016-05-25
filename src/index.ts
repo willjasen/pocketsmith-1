@@ -1,7 +1,12 @@
+import Accounts from './accounts';
+
 class PocketSmith {
-	constructor() {
-		console.log(`Hello World`);
+
+	public Accounts: Accounts;
+
+	constructor(public token: string) {
+		this.Accounts = new Accounts();
 	}
 }
 
-export default PocketSmith;
+export = PocketSmith;
