@@ -6,7 +6,6 @@ class PocketSmith {
 	public Accounts: Accounts;
 
 	constructor(public token: string) {
-
 		Client.token = token;
 
 		this.Accounts = new Accounts();
