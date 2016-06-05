@@ -1,6 +1,9 @@
-var expect = require('chai').expect;
+var expect = require('chai').expect,
+	nock = require('nock');
 
 var PocketSmith = require('../../dist');
+
+var API = 'https://api.pocketsmith.com/v2';
 
 describe('Accounts', function () {
 	before(function () {
@@ -23,5 +26,23 @@ describe('Accounts', function () {
 					.to.be.an.instanceOf(Function);
 			})
 		});
+	});
+
+	describe('getAll', function () {
+		beforeEach(function () {
+
+		});
+
+		it('shoudl GET to /users/{id}/accounts', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.accounts.getAll(1)
+				.then(function () {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		})
 	});
 });

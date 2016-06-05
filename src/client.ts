@@ -19,7 +19,15 @@ class Client {
 				if (e != null) {
 					reject(e);
 				} else {
-					resolve(JSON.parse(body));
+					let returns = void 0;
+
+					try {
+						returns = JSON.parse(body)
+					} catch (e) {
+						returns = body;
+					}
+
+					resolve(returns);
 				}
 			})
 		});

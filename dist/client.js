@@ -21,7 +21,14 @@ var Client = (function () {
                     reject(e);
                 }
                 else {
-                    resolve(JSON.parse(body));
+                    var returns = void 0;
+                    try {
+                        returns = JSON.parse(body);
+                    }
+                    catch (e) {
+                        returns = body;
+                    }
+                    resolve(returns);
                 }
             });
         });

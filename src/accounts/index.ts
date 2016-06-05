@@ -12,9 +12,6 @@ import * as Promise from 'bluebird';
 import Client from '../client';
 
 class Accounts {
-	constructor() {
-
-	}
 
 	getAll(id: number): PromiseLike<Array<AccountInterface>> {
 		return new Promise((resolve) => {
