@@ -13,12 +13,20 @@ import Client from '../client';
 
 class Accounts {
 
-	getAll(id: number): PromiseLike<Array<AccountInterface>> {
-		return new Promise((resolve) => {
+	getAll(id: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+		let prom = new Promise((resolve) => {
 			Client.get(`users/${id}/accounts`).then((resp) => {
 				resolve(resp);
 			})
-		})
+		});
+
+		if (callback) {
+			prom.then((resp) => {
+				callback(resp);
+			});
+		}
+
+		return prom;
 	}
 }
 

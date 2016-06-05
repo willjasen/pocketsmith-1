@@ -58,11 +58,47 @@ describe('Accounts', function () {
 				});
 		});
 
-		// It should return data in the then handler
+		it('should return data in the then', function (done) {
+			var data = [{ test: 'test' }];
 
-		// It should accept callback
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200, data);
 
-		// It should return promise
+			this.accounts.getAll(1)
+				.then((resp) => {
+					expect(resp)
+						.to.be.an.instanceOf(Array);
+
+					expect(resp.length)
+						.to.equal(data.length);
+
+					expect(resp[0].test)
+						.to.equal(data[0].test);
+
+					done();
+				})
+		});
+
+		it('should accept a callback', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.accounts.getAll(1, function () {
+				done();
+			});
+		});
+
+		it('should return a promise', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.accounts.getAll(1)
+				.then(done.bind(null, null))
+				.catch(done.bind(null, null))
+		});
 
 		// It should catch errors to the cath promise
 	});
