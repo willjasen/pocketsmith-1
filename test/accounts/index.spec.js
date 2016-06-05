@@ -56,6 +56,14 @@ describe('Accounts', function () {
 					expect(req.isDone()).to.be.true;
 					done();
 				});
-		})
+		});
+
+		// It should return data in the then handler
+
+		// It should accept callback
+
+		// It should return promise
+
+		// It should catch errors to the cath promise
 	});
 });
