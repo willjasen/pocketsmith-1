@@ -29,13 +29,26 @@ describe('Accounts', function () {
 	});
 
 	describe('getAll', function () {
-		beforeEach(function () {
-
+		afterEach(function () {
+			nock.cleanAll();
 		});
 
 		it('shoudl GET to /users/{id}/accounts', function (done) {
 			var req = nock(API)
 				.get('/users/1/accounts')
+				.reply(200);
+
+			this.accounts.getAll(1)
+				.then(function () {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should have a token header', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.matchHeader('Authorization', 'Key TOKEN')
 				.reply(200);
 
 			this.accounts.getAll(1)
