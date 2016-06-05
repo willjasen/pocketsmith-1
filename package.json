@@ -1,39 +1,39 @@
 {
-  "name": "pocketsmith",
-  "version": "0.0.1",
-  "description": "PocketSmith api wrapper for Node.",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.spec.js)",
-    "test-watch": "NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.spec.js) --watch",
-    "compile": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maraisr/pocketsmith.git"
-  },
-  "keywords": [
-    "pocketsmith",
-    "budget",
-    "api",
-    "wrapper"
-  ],
-  "author": "Marais Rossouw <me@maraisr.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/maraisr/pocketsmith/issues"
-  },
-  "homepage": "https://github.com/maraisr/pocketsmith#readme",
-  "dependencies": {
-    "bluebird": "^3.4.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "codecov": "^1.0.1",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.5.2",
-    "nock": "^8.0.0",
-    "request": "^2.72.0",
-    "typescript": "^1.8.10"
-  }
+	"name": "pocketsmith",
+	"version": "0.0.1",
+	"description": "PocketSmith api wrapper for Node.",
+	"main": "dist/index.js",
+	"scripts": {
+		"test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.spec.js)",
+		"test-watch": "NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.spec.js) --watch",
+		"compile": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/maraisr/pocketsmith.git"
+	},
+	"keywords": [
+		"pocketsmith",
+		"budget",
+		"api",
+		"wrapper"
+	],
+	"author": "Marais Rossouw <me@maraisr.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/maraisr/pocketsmith/issues"
+	},
+	"homepage": "https://github.com/maraisr/pocketsmith#readme",
+	"dependencies": {
+		"bluebird": "^3.4.0"
+	},
+	"devDependencies": {
+		"chai": "^3.5.0",
+		"codecov": "^1.0.1",
+		"istanbul": "^0.4.3",
+		"mocha": "^2.5.2",
+		"nock": "^8.0.0",
+		"request": "^2.72.0",
+		"typescript": "^1.8.10"
+	}
 }
