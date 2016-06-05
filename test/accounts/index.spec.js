@@ -19,7 +19,7 @@ describe('Accounts', function () {
 			'delete'
 		];
 
-		methods.forEach(function (method) {
+		methods.forEach((method) => {
 			it('should have a ' + method + ' method', function () {
 				expect(this.accounts[method])
 					.to.exist
@@ -33,13 +33,13 @@ describe('Accounts', function () {
 			nock.cleanAll();
 		});
 
-		it('shoudl GET to /users/{id}/accounts', function (done) {
+		it('should GET to /users/{id}/accounts', function (done) {
 			var req = nock(API)
 				.get('/users/1/accounts')
 				.reply(200);
 
 			this.accounts.getAll(1)
-				.then(function () {
+				.then(() => {
 					expect(req.isDone()).to.be.true;
 					done();
 				});
