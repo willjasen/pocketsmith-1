@@ -3,13 +3,12 @@ var Promise = require('bluebird');
 var client_1 = require('../client');
 var Accounts = (function () {
     function Accounts() {
-        client_1.default.get('me')
-            .then(function (resp) {
-            console.log(resp);
-        });
     }
-    Accounts.prototype.getAll = function () {
+    Accounts.prototype.getAll = function (id) {
         return new Promise(function (resolve) {
+            client_1.default.get("users/" + id + "/accounts").then(function (resp) {
+                resolve(resp);
+            });
         });
     };
     return Accounts;
