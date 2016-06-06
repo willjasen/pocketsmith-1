@@ -4,7 +4,7 @@ import * as Promise from 'bluebird';
 class Client {
 	public token: string;
 
-	private resource(method: string, url: string, payload?: any): PromiseLike<any> {
+	private resource(method: string, url: string, payload?: any): Promise<any> {
 		return new Promise((resolve, reject) => {
 			Request({
 				method: method,
@@ -31,8 +31,27 @@ class Client {
 		});
 	}
 
-	get(url: string): PromiseLike<any> {
-		return this.resource('GET', url);
+	private frame(method: string, url:string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this.resource(method, url)
+				.then((resp) => {
+					resolve(resp);
+				}, (e) => {
+					reject(e);
+				});
+		});
+	}
+
+	get(url: string, callback?: Function): Promise<any> {
+		let prom = this.frame('GET', url);
+
+		if (callback) {
+			prom.then((resp) => {
+				callback(resp);
+			});
+		}
+
+		return prom;
 	}
 }
 

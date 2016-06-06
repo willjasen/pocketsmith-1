@@ -16,7 +16,7 @@ describe('PocketSmith', function () {
 			//'Categories',
 			//'Institutions',
 			//'Users',
-			//'Transactions',
+			'Transactions',
 			//'Scenarios'
 		];
 

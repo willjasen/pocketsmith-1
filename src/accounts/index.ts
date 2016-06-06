@@ -12,28 +12,8 @@ import * as Promise from 'bluebird';
 import Client from '../client';
 
 class Accounts {
-
-	private frame(url: string, callback: Function): Promise<any> {
-		let prom = new Promise((resolve, reject) => {
-			Client.get(url)
-				.then((resp) => {
-					resolve(resp);
-				}, (e) => {
-					reject(e);
-				});
-		});
-
-		if (callback) {
-			prom.then((resp) => {
-				callback(resp);
-			});
-		}
-
-		return prom;
-	}
-
-	getAll(id: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
-		return this.frame(`users/${id}/accounts`, callback);
+	getAll(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+		return Client.get(`users/${userId}/accounts`, callback);
 	}
 }
 
