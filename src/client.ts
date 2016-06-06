@@ -19,19 +19,15 @@ class Client {
 				if (e != null) {
 					reject(e);
 				} else {
-					if (req.statusCode === 200) {
-						let returns = void 0;
+					let returns = void 0;
 
-						try {
-							returns = JSON.parse(body)
-						} catch (e) {
-							returns = body;
-						}
-
-						resolve(returns);
-					} else {
-						reject(body);
+					try {
+						returns = JSON.parse(body)
+					} catch (e) {
+						returns = body;
 					}
+
+					resolve(returns);
 				}
 			})
 		});
