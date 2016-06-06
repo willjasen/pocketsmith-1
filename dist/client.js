@@ -21,14 +21,19 @@ var Client = (function () {
                     reject(e);
                 }
                 else {
-                    var returns = void 0;
-                    try {
-                        returns = JSON.parse(body);
+                    if (req.statusCode === 200) {
+                        var returns = void 0;
+                        try {
+                            returns = JSON.parse(body);
+                        }
+                        catch (e) {
+                            returns = body;
+                        }
+                        resolve(returns);
                     }
-                    catch (e) {
-                        returns = body;
+                    else {
+                        reject(body);
                     }
-                    resolve(returns);
                 }
             });
         });

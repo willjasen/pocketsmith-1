@@ -5,14 +5,16 @@ var Accounts = (function () {
     function Accounts() {
     }
     Accounts.prototype.getAll = function (id, callback) {
-        var prom = new Promise(function (resolve) {
-            client_1.default.get("users/" + id + "/accounts").then(function (resp) {
+        var prom = new Promise(function (resolve, reject) {
+            client_1.default.get("users/" + id + "/accounts")
+                .then(function (resp) {
                 resolve(resp);
+            }, function (e) {
+                reject(e);
             });
         });
         if (callback) {
-            prom
-                .then(function (resp) {
+            prom.then(function (resp) {
                 callback(resp);
             });
         }

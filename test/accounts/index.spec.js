@@ -28,7 +28,7 @@ describe('Accounts', function () {
 		});
 	});
 
-	describe('getAll', function () {
+	describe('@getAll', function () {
 		afterEach(function () {
 			nock.cleanAll();
 		});
