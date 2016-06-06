@@ -10,7 +10,7 @@ class Client {
 				method: method,
 				url: `https://api.pocketsmith.com/v2/${url}`,
 				headers: {
-					'Authorization': ((t) => {
+					'Authorization': ((t: string) => {
 						return (/Key/.test(t)) ? t : `Key ${t}`;
 					})(this.token),
 					'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ class Client {
 				if (e != null) {
 					reject(e);
 				} else {
-					let returns = void 0;
+					let returns: Object | string = void 0;
 
 					try {
 						returns = JSON.parse(body)

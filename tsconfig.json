@@ -3,9 +3,11 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "es5",
+		"noImplicitAny": true,
 		"experimentalDecorators": true,
 		"removeComments": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"inlineSourceMap": true
 	},
 	"files": [
 		"typings/index.d.ts",
