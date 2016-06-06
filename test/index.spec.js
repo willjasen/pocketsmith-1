@@ -40,13 +40,12 @@ describe('PocketSmith', function () {
 			it('should fail when error sent', function (done) {
 				var req = nock(API)
 					.get('/users/1/accounts')
-					.reply(404, 'Error');
+					.replyWithError('Error');
 
 				this.smith.Accounts.getAll(1)
-					.then(function (e) {
-					}, function (e) {
+					.catch(function (e) {
 						done();
-					});
+					})
 			});
 		})
 	});
