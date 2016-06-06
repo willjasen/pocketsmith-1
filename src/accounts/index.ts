@@ -12,7 +12,7 @@ import * as Promise from 'bluebird';
 import Client from '../client';
 
 class Accounts {
-	getAll(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+	getAllByUser(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
 		return Client.get(`users/${userId}/accounts`, callback);
 	}
 }

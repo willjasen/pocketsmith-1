@@ -21,7 +21,7 @@ describe('Client', function () {
 			.get('/users/1/accounts')
 			.replyWithError('Error');
 
-		this.smith.Accounts.getAll(1)
+		this.smith.Accounts.getAllByUser(1)
 			.catch(function (e) {
 				done();
 			});

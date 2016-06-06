@@ -15,7 +15,7 @@ describe('Accounts', function () {
 	describe('instance', function () {
 		var methods = [
 			//'get',
-			'getAll',
+			'getAllByUser',
 			//'create',
 			//'update',
 			//'delete'
@@ -30,7 +30,7 @@ describe('Accounts', function () {
 		});
 	});
 
-	describe('@getAll', function () {
+	describe('@getAllByUser', function () {
 		afterEach(function () {
 			nock.cleanAll();
 		});
@@ -40,7 +40,7 @@ describe('Accounts', function () {
 				.get('/users/1/accounts')
 				.reply(200);
 
-			this.accounts.getAll(1)
+			this.accounts.getAllByUser(1)
 				.then(() => {
 					expect(req.isDone()).to.be.true;
 					done();
@@ -53,7 +53,7 @@ describe('Accounts', function () {
 				.matchHeader('Authorization', 'Key TOKEN')
 				.reply(200);
 
-			this.accounts.getAll(1)
+			this.accounts.getAllByUser(1)
 				.then(() => {
 					expect(req.isDone()).to.be.true;
 					done();
@@ -67,7 +67,7 @@ describe('Accounts', function () {
 				.get('/users/1/accounts')
 				.reply(200, data);
 
-			this.accounts.getAll(1)
+			this.accounts.getAllByUser(1)
 				.then((resp) => {
 					expect(resp)
 						.to.be.an.instanceOf(Array);
@@ -87,7 +87,7 @@ describe('Accounts', function () {
 				.get('/users/1/accounts')
 				.reply(200);
 
-			this.accounts.getAll(1, function () {
+			this.accounts.getAllByUser(1, function () {
 				done();
 			});
 		});
@@ -97,7 +97,7 @@ describe('Accounts', function () {
 				.get('/users/1/accounts')
 				.reply(200);
 
-			this.accounts.getAll(1)
+			this.accounts.getAllByUser(1)
 				.then(done.bind(null, null))
 				.catch(done.bind(null, null))
 		});
