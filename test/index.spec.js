@@ -31,22 +31,5 @@ describe('PocketSmith', function () {
 				.to.exist
 				.to.be.equal('TOKEN');
 		});
-
-		describe('Client', function () {
-			afterEach(function () {
-				nock.cleanAll();
-			});
-
-			it('should fail when error sent', function (done) {
-				var req = nock(API)
-					.get('/users/1/accounts')
-					.replyWithError('Error');
-
-				this.smith.Accounts.getAll(1)
-					.catch(function (e) {
-						done();
-					})
-			});
-		})
 	});
 });
