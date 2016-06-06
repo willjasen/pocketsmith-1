@@ -10,9 +10,7 @@ class Client {
 				method: method,
 				url: `https://api.pocketsmith.com/v2/${url}`,
 				headers: {
-					'Authorization': ((t: string) => {
-						return (/Key/.test(t)) ? t : `Key ${t}`;
-					})(this.token),
+					'Authorization': this.token,
 					'Content-Type': 'application/json'
 				}
 			}, (e, req, body) => {

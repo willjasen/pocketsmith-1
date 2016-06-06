@@ -24,4 +24,20 @@ describe('Client', function () {
 				done();
 			});
 	});
+
+	it('should append "Key" when you dont specify a toekn type', function () {
+		let s = new PocketSmith('TOKEN');
+
+		expect(s.token)
+			.to.exist
+			.to.be.equal('Key TOKEN');
+	});
+
+	it('should not prepend "Key" when a type is provided', function () {
+		let s = new PocketSmith('Bearer TOKEN');
+
+		expect(s.token)
+			.to.exist
+			.to.be.equal('Bearer TOKEN');
+	});
 })

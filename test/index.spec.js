@@ -13,23 +13,17 @@ describe('PocketSmith', function () {
 	describe('instance', function () {
 		var methods = [
 			'Accounts',
-			'Categories',
-			'Institutions',
-			'Users',
-			'Transactions',
-			'Scenarios'
+			//'Categories',
+			//'Institutions',
+			//'Users',
+			//'Transactions',
+			//'Scenarios'
 		];
 
 		methods.forEach((method) => {
 			it(`should have a ${method} method`, function () {
 				expect(this.smith[method]).to.exist;
 			})
-		});
-
-		it(`should have a token defined`, function () {
-			expect(this.smith.token)
-				.to.exist
-				.to.be.equal('TOKEN');
 		});
 	});
 });

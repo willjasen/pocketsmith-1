@@ -13,9 +13,9 @@ import Client from '../client';
 
 class Accounts {
 
-	getAll(id: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+	private frame(url: string, callback: Function): Promise<any> {
 		let prom = new Promise((resolve, reject) => {
-			Client.get(`users/${id}/accounts`)
+			Client.get(url)
 				.then((resp) => {
 					resolve(resp);
 				}, (e) => {
@@ -30,6 +30,10 @@ class Accounts {
 		}
 
 		return prom;
+	}
+
+	getAll(id: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+		return this.frame(`users/${id}/accounts`, callback);
 	}
 }
 

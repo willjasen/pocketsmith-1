@@ -12,11 +12,11 @@ describe('Accounts', function () {
 
 	describe('instance', function () {
 		var methods = [
-			'get',
+			//'get',
 			'getAll',
-			'create',
-			'update',
-			'delete'
+			//'create',
+			//'update',
+			//'delete'
 		];
 
 		methods.forEach((method) => {
@@ -52,7 +52,7 @@ describe('Accounts', function () {
 				.reply(200);
 
 			this.accounts.getAll(1)
-				.then(function () {
+				.then(() => {
 					expect(req.isDone()).to.be.true;
 					done();
 				});
