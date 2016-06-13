@@ -2,11 +2,10 @@ language: node_js
 node_js:
   - "5"
   - "6"
-  
+
 cache:
 directories:
   - node_modules
-
 
 before_script:
   - npm prune
@@ -14,4 +13,4 @@ before_script:
 script:
   - npm test
   - cat ./coverage/lcov.info | ./node_modules/.bin/codecov
-  
+
