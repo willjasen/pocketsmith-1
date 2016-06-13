@@ -16,6 +16,7 @@ describe('Accounts', function () {
 		var methods = [
 			'get',
 			'getAllByUser',
+			'getAllByInstitution',
 			//'create',
 			//'update',
 			//'delete'
@@ -134,7 +135,7 @@ describe('Accounts', function () {
 		});
 
 		it('should return data in the then', function (done) {
-			var data = [{ test: 'test' }];
+			var data = { test: 'test' };
 
 			var req = nock(API)
 				.get('/accounts/1')
@@ -143,13 +144,13 @@ describe('Accounts', function () {
 			this.accounts.get(1)
 				.then((resp) => {
 					expect(resp)
-						.to.be.an.instanceOf(Array);
+						.to.be.an.instanceOf(Object);
 
 					expect(resp.length)
 						.to.equal(data.length);
 
-					expect(resp[0].test)
-						.to.equal(data[0].test);
+					expect(resp.test)
+						.to.equal(data.test);
 
 					done();
 				})
@@ -171,6 +172,79 @@ describe('Accounts', function () {
 				.reply(200);
 
 			this.accounts.get(1)
+				.then(done.bind(null, null))
+				.catch(done.bind(null, null))
+		});
+	});
+	
+	describe('@getAllByInstitution', function () {
+		afterEach(function () {
+			nock.cleanAll();
+		});
+
+		it('should GET to /users/{id}/accounts', function (done) {
+			var req = nock(API)
+				.get('/institutions/1/accounts')
+				.reply(200);
+
+			this.accounts.getAllByInstitution(1)
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should have a token header', function (done) {
+			var req = nock(API)
+				.get('/institutions/1/accounts')
+				.matchHeader('Authorization', 'Key TOKEN')
+				.reply(200);
+
+			this.accounts.getAllByInstitution(1)
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should return data in the then', function (done) {
+			var data = [{ test: 'test' }];
+
+			var req = nock(API)
+				.get('/institutions/1/accounts')
+				.reply(200, data);
+
+			this.accounts.getAllByInstitution(1)
+				.then((resp) => {
+					expect(resp)
+						.to.be.an.instanceOf(Array);
+
+					expect(resp.length)
+						.to.equal(data.length);
+
+					expect(resp[0].test)
+						.to.equal(data[0].test);
+
+					done();
+				})
+		});
+
+		it('should accept a callback', function (done) {
+			var req = nock(API)
+				.get('/institutions/1/accounts')
+				.reply(200);
+
+			this.accounts.getAllByInstitution(1, function () {
+				done();
+			});
+		});
+
+		it('should return a promise', function (done) {
+			var req = nock(API)
+				.get('/institutions/1/accounts')
+				.reply(200);
+
+			this.accounts.getAllByInstitution(1)
 				.then(done.bind(null, null))
 				.catch(done.bind(null, null))
 		});
