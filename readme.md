@@ -20,5 +20,14 @@ var PocketSmith = require('pocketsmith');
 
 var Smith = new PocketSmith('my-token'); // Obtain a token via https://developers.pocketsmith.com/
 
+// Scoped to the `me` endpoint
+Smith.init().then(function(User) {
+	User.Accounts.getAll(function(Accounts) { ... });
+});
+
+// -- or --
+
+Smith.Accounts.getAllByUser(1, function(Accounts) { ... });
+
 // List of api endpoints coming soon...
 ```

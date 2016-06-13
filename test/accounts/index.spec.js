@@ -9,14 +9,16 @@ var API = 'https://api.pocketsmith.com/v2';
 
 describe('Accounts', function () {
 	before(function () {
-		this.accounts = (new PocketSmith('TOKEN')).Accounts;
+		this.smith = (new PocketSmith('TOKEN'));
+		this.accounts = this.smith.Accounts;
 	});
 
 	describe('instance', function () {
 		var methods = [
 			'get',
 			'getAllByUser',
-			'getAllByInstitution'
+			'getAllByInstitution',
+			'getAll'
 		];
 
 		methods.forEach((method) => {
@@ -242,6 +244,90 @@ describe('Accounts', function () {
 				.reply(200);
 
 			this.accounts.getAllByInstitution(1)
+				.then(done.bind(null, null))
+				.catch(done.bind(null, null))
+		});
+	});
+	
+	describe('@getAll', function() {
+		before(function(done) {
+			var req = nock(API)
+				.get('/me')
+				.reply(200, {id: 1});
+			
+			this.smith.init().then((smith) => {
+				this.inst = smith;
+				done();
+			});
+		});
+		
+		afterEach(function () {
+			nock.cleanAll();
+		});
+
+		it('should GET to /users/{id}/accounts', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.inst.Accounts.getAll()
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should have a token header', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.matchHeader('Authorization', 'Key TOKEN')
+				.reply(200);
+
+			this.inst.Accounts.getAll()
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should return data in the then', function (done) {
+			var data = [{ test: 'test' }];
+
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200, data);
+
+			this.inst.Accounts.getAll()
+				.then((resp) => {
+					expect(resp)
+						.to.be.an.instanceOf(Array);
+
+					expect(resp.length)
+						.to.equal(data.length);
+
+					expect(resp[0].test)
+						.to.equal(data[0].test);
+
+					done();
+				})
+		});
+
+		it('should accept a callback', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.inst.Accounts.getAll(function () {
+				done();
+			});
+		});
+
+		it('should return a promise', function (done) {
+			var req = nock(API)
+				.get('/users/1/accounts')
+				.reply(200);
+
+			this.inst.Accounts.getAll()
 				.then(done.bind(null, null))
 				.catch(done.bind(null, null))
 		});

@@ -12,15 +12,23 @@ import * as Promise from 'bluebird';
 import Client from '../client';
 
 export default class Accounts {
-	static get(id: number, callback?: Function):PromiseLike<AccountInterface> {
+	static get(id: number, callback?: Function): Promise<AccountInterface> {
 		return Client.get(`accounts/${id}`, callback);
 	}
-	
-	static getAllByUser(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+
+	static getAllByUser(userId: number, callback?: Function): Promise<Array<AccountInterface>> {
 		return Client.get(`users/${userId}/accounts`, callback);
 	}
-	
-	static getAllByInstitution(institutionId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+
+	static getAllByInstitution(institutionId: number, callback?: Function): Promise<Array<AccountInterface>> {
 		return Client.get(`institutions/${institutionId}/accounts`, callback);
+	}
+
+	public static getAll(callback?: Function): Promise<Array<AccountInterface>> {
+		if (Client.Me.data) {
+			return this.getAllByUser(Client.Me.data.id, callback);
+		} else {
+			throw new Error('PocketSmith: Please init a `me` PocketSmith inistance. Eg: (new PocketSmith(\'token\')).init().then(() => { ... })');
+		}
 	}
 }
