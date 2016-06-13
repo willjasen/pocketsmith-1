@@ -15,6 +15,10 @@ class Accounts {
 	getAllByUser(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
 		return Client.get(`users/${userId}/accounts`, callback);
 	}
+	
+	get(id: number, callback?: Function):PromiseLike<AccountInterface> {
+		return Client.get(`accounts/${id}`, callback);
+	}
 }
 
 export default Accounts;

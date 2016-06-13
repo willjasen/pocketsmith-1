@@ -14,7 +14,7 @@ describe('Accounts', function () {
 
 	describe('instance', function () {
 		var methods = [
-			//'get',
+			'get',
 			'getAllByUser',
 			//'create',
 			//'update',
@@ -101,7 +101,78 @@ describe('Accounts', function () {
 				.then(done.bind(null, null))
 				.catch(done.bind(null, null))
 		});
+	});
+	
+	describe('@get', function () {
+		afterEach(function () {
+			nock.cleanAll();
+		});
 
-		// It should catch errors to the cath promise
+		it('should GET to /accounts/{id}', function (done) {
+			var req = nock(API)
+				.get('/accounts/1')
+				.reply(200);
+
+			this.accounts.get(1)
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should have a token header', function (done) {
+			var req = nock(API)
+				.get('/accounts/1')
+				.matchHeader('Authorization', 'Key TOKEN')
+				.reply(200);
+
+			this.accounts.get(1)
+				.then(() => {
+					expect(req.isDone()).to.be.true;
+					done();
+				});
+		});
+
+		it('should return data in the then', function (done) {
+			var data = [{ test: 'test' }];
+
+			var req = nock(API)
+				.get('/accounts/1')
+				.reply(200, data);
+
+			this.accounts.get(1)
+				.then((resp) => {
+					expect(resp)
+						.to.be.an.instanceOf(Array);
+
+					expect(resp.length)
+						.to.equal(data.length);
+
+					expect(resp[0].test)
+						.to.equal(data[0].test);
+
+					done();
+				})
+		});
+
+		it('should accept a callback', function (done) {
+			var req = nock(API)
+				.get('/accounts/1')
+				.reply(200);
+
+			this.accounts.get(1, function () {
+				done();
+			});
+		});
+
+		it('should return a promise', function (done) {
+			var req = nock(API)
+				.get('/accounts/1')
+				.reply(200);
+
+			this.accounts.get(1)
+				.then(done.bind(null, null))
+				.catch(done.bind(null, null))
+		});
 	});
 });
