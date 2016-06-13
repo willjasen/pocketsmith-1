@@ -13,7 +13,7 @@ PocketSmith Node API
 npm i pocketsmith
 ```
 
-## Usuage
+## Usage
 
 ```js
 var PocketSmith = require('pocketsmith');
@@ -21,4 +21,4 @@ var PocketSmith = require('pocketsmith');
 var Smith = new PocketSmith('my-token'); // Obtain a token via https://developers.pocketsmith.com/
 
 // List of api endpoints coming soon...
-``
+```
