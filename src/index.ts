@@ -1,12 +1,12 @@
 import Accounts from './accounts';
-import Transactions from './transactions';
+import Categories from './categories';
 
 import Client from './client';
 
 class PocketSmith {
 
 	public Accounts: Accounts;
-	public Transactions: Transactions;
+	public Categories: Categories;
 
 	constructor(public token: string) {
 		this.token = ((t: string) => {
@@ -15,8 +15,8 @@ class PocketSmith {
 
 		Client.token = this.token;
 
-		this.Accounts = new Accounts();
-		this.Transactions = new Transactions();
+		this.Accounts = Accounts;
+		this.Categories = Categories;
 	}
 }
 

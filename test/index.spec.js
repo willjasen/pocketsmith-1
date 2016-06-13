@@ -15,10 +15,10 @@ describe('PocketSmith', function () {
 	describe('instance', function () {
 		var methods = [
 			'Accounts',
-			//'Categories',
+			'Categories',
 			//'Institutions',
 			//'Users',
-			'Transactions',
+			//'Transactions',
 			//'Scenarios'
 		];
 

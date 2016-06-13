@@ -11,18 +11,16 @@ interface AccountInterface {
 import * as Promise from 'bluebird';
 import Client from '../client';
 
-class Accounts {
-	get(id: number, callback?: Function):PromiseLike<AccountInterface> {
+export default class Accounts {
+	static get(id: number, callback?: Function):PromiseLike<AccountInterface> {
 		return Client.get(`accounts/${id}`, callback);
 	}
 	
-	getAllByUser(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+	static getAllByUser(userId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
 		return Client.get(`users/${userId}/accounts`, callback);
 	}
 	
-	getAllByInstitution(institutionId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
+	static getAllByInstitution(institutionId: number, callback?: Function): PromiseLike<Array<AccountInterface>> {
 		return Client.get(`institutions/${institutionId}/accounts`, callback);
 	}
 }
-
-export default Accounts;
