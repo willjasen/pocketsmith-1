@@ -1,20 +1,20 @@
 "use strict";
-var client_1 = require('../client');
 var Accounts = (function () {
-    function Accounts() {
+    function Accounts(context) {
+        this.context = context;
     }
-    Accounts.get = function (id, callback) {
-        return client_1.default.get("accounts/" + id, callback);
+    Accounts.prototype.get = function (id, callback) {
+        return this.context.Client.get("accounts/" + id, callback);
     };
-    Accounts.getAllByUser = function (userId, callback) {
-        return client_1.default.get("users/" + userId + "/accounts", callback);
+    Accounts.prototype.getAllByUser = function (userId, callback) {
+        return this.context.Client.get("users/" + userId + "/accounts", callback);
     };
-    Accounts.getAllByInstitution = function (institutionId, callback) {
-        return client_1.default.get("institutions/" + institutionId + "/accounts", callback);
+    Accounts.prototype.getAllByInstitution = function (institutionId, callback) {
+        return this.context.Client.get("institutions/" + institutionId + "/accounts", callback);
     };
-    Accounts.getAll = function (callback) {
-        if (client_1.default.Me.data) {
-            return this.getAllByUser(client_1.default.Me.data.id, callback);
+    Accounts.prototype.getAll = function (callback) {
+        if (this.context.Me) {
+            return this.getAllByUser(this.context.Me.data.id, callback);
         }
         else {
             throw new Error('PocketSmith: Please init a `me` PocketSmith inistance. Eg: (new PocketSmith(\'token\')).init().then(() => { ... })');
@@ -24,4 +24,4 @@ var Accounts = (function () {
 }());
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Accounts;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvYWNjb3VudHMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQVdBLHVCQUFtQixXQUFXLENBQUMsQ0FBQTtBQUUvQjtJQUFBO0lBb0JBLENBQUM7SUFuQk8sWUFBRyxHQUFWLFVBQVcsRUFBVSxFQUFFLFFBQW1CO1FBQ3pDLE1BQU0sQ0FBQyxnQkFBTSxDQUFDLEdBQUcsQ0FBQyxjQUFZLEVBQUksRUFBRSxRQUFRLENBQUMsQ0FBQztJQUMvQyxDQUFDO0lBRU0scUJBQVksR0FBbkIsVUFBb0IsTUFBYyxFQUFFLFFBQW1CO1FBQ3RELE1BQU0sQ0FBQyxnQkFBTSxDQUFDLEdBQUcsQ0FBQyxXQUFTLE1BQU0sY0FBVyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3pELENBQUM7SUFFTSw0QkFBbUIsR0FBMUIsVUFBMkIsYUFBcUIsRUFBRSxRQUFtQjtRQUNwRSxNQUFNLENBQUMsZ0JBQU0sQ0FBQyxHQUFHLENBQUMsa0JBQWdCLGFBQWEsY0FBVyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3ZFLENBQUM7SUFFYSxlQUFNLEdBQXBCLFVBQXFCLFFBQW1CO1FBQ3ZDLEVBQUUsQ0FBQyxDQUFDLGdCQUFNLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7WUFDcEIsTUFBTSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsZ0JBQU0sQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQztRQUN2RCxDQUFDO1FBQUMsSUFBSSxDQUFDLENBQUM7WUFDUCxNQUFNLElBQUksS0FBSyxDQUFDLG9IQUFvSCxDQUFDLENBQUM7UUFDdkksQ0FBQztJQUNGLENBQUM7SUFDRixlQUFDO0FBQUQsQ0FBQyxBQXBCRCxJQW9CQztBQXBCRDswQkFvQkMsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvYWNjb3VudHMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUdBO0lBQ0Msa0JBQW9CLE9BQTRCO1FBQTVCLFlBQU8sR0FBUCxPQUFPLENBQXFCO0lBRWhELENBQUM7SUFFRCxzQkFBRyxHQUFILFVBQUksRUFBVSxFQUFFLFFBQW1CO1FBQ2xDLE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsY0FBWSxFQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDNUQsQ0FBQztJQUVELCtCQUFZLEdBQVosVUFBYSxNQUFjLEVBQUUsUUFBbUI7UUFDL0MsTUFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxXQUFTLE1BQU0sY0FBVyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3RFLENBQUM7SUFFRCxzQ0FBbUIsR0FBbkIsVUFBb0IsYUFBcUIsRUFBRSxRQUFtQjtRQUM3RCxNQUFNLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLGtCQUFnQixhQUFhLGNBQVcsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUNwRixDQUFDO0lBRUQseUJBQU0sR0FBTixVQUFPLFFBQW1CO1FBQ3pCLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNyQixNQUFNLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQzdELENBQUM7UUFBQyxJQUFJLENBQUMsQ0FBQztZQUNQLE1BQU0sSUFBSSxLQUFLLENBQUMsb0hBQW9ILENBQUMsQ0FBQztRQUN2SSxDQUFDO0lBQ0YsQ0FBQztJQUNGLGVBQUM7QUFBRCxDQUFDLEFBeEJELElBd0JDO0FBeEJEOzBCQXdCQyxDQUFBIn0=

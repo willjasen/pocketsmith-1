@@ -1,16 +1,16 @@
-interface CategoryInterface {
-	
-}
-
 import * as Promise from 'bluebird';
-import Client from '../client';
+import {PocketSmithInterface, CategoryInterface} from '../interfaces';
 
 export default class Categories {
-	static get(id: number, callback?: Function):Promise<CategoryInterface> {
-		return Client.get(`categories/${id}`, callback);
+	constructor(private context:PocketSmithInterface) {
+		
 	}
 	
-	static getAllByUser(userId: number, callback?: Function): Promise<Array<CategoryInterface>> {
-		return Client.get(`users/${userId}/categories`, callback);
+	get(id: number, callback?: Function):Promise<CategoryInterface> {
+		return this.context.Client.get(`categories/${id}`, callback);
+	}
+	
+	getAllByUser(userId: number, callback?: Function): Promise<Array<CategoryInterface>> {
+		return this.context.Client.get(`users/${userId}/categories`, callback);
 	}
 }

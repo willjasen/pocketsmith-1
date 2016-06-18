@@ -331,5 +331,13 @@ describe('Accounts', function () {
 				.then(done.bind(null, null))
 				.catch(done.bind(null, null))
 		});
+		
+		it('should fail when no `init` ran for me context', function () {
+			var Smith = (new PocketSmith('TOKEN'));
+			
+			expect(() => {
+				Smith.Accounts.getAll()
+			}).to.throw();
+		});
 	});
 });

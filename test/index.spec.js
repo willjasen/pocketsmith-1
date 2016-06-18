@@ -39,23 +39,42 @@ describe('PocketSmith', function() {
 		
 		afterEach(function() {
 			nock.cleanAll();
-			this.smith.Me = void 0;
 		});
 
 		it('should expose the same methods', function(done) {
+			var self = this;
+			
 			this.smith.init().then(function(smith) {
 				methods.forEach((method) => {
 					expect(smith[method]).to.exist;
 				});
 
+				self.smith.Me = void 0;
 				done();
 			});
 		})
 
-		it('should return a promise', function(done) {				
+		it('should return a promise', function(done) {		
+			var self = this;
+					
 			this.smith.init()
-				.then(done.bind(null, null))
-				.catch(done.bind(null, null))
+				.then(() => {
+					self.smith.Me = void 0;
+					done();
+				})
+				.catch(() => {
+					self.smith.Me = void 0;
+					done();
+				})
+		});
+		
+		it('should return the cached copy of me if its called again', function (done) {
+			// Codecoverage will illustrate this
+			this.smith.init();
+			this.smith.init();
+			
+			this.smith.Me = void 0;
+			done();
 		});
 	});
 });

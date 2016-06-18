@@ -1,11 +1,8 @@
-import MeInterface from './me';
-
 import * as Request from 'request';
 import * as Promise from 'bluebird';
 
 class Client {
-	public token: string;
-	public Me: MeInterface = void 0;
+	constructor(private token:string) {}
 
 	private resource(method: string, url: string, payload?: any): Promise<any> {
 		return new Promise((resolve, reject) => {
@@ -58,4 +55,4 @@ class Client {
 	}
 }
 
-export default new Client();
+export default Client;
