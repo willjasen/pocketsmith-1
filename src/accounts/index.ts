@@ -2,10 +2,10 @@ import * as Promise from 'bluebird';
 import {PocketSmithInterface, AccountInterface} from '../interfaces';
 
 export default class Accounts {
-	constructor(private context:PocketSmithInterface) {
-		
+	constructor(private context: PocketSmithInterface) {
+
 	}
-	
+
 	get(id: number, callback?: Function): Promise<AccountInterface> {
 		return this.context.Client.get(`accounts/${id}`, callback);
 	}

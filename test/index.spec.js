@@ -76,7 +76,6 @@ describe('PocketSmith', function () {
 				self.smith.init();
 			});
 
-
 			this.smith.Me = void 0;
 			done();
 		});
