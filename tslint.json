@@ -1,6 +1,7 @@
 {
 	"rules": {
 		"class-name": true,
+		"no-use-before-declare": true,
 		"comment-format": [
 			true,
 			"check-space"
