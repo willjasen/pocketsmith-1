@@ -18,11 +18,11 @@ class Client {
 				.then(response => {
 					resolve(response.body);
 				}, err => {
-					reject(err)
-				})
-				/*.catch(e => {
-					reject(e);
-				})*/
+					reject(err);
+				});
+			/*.catch(e => {
+				reject(e);
+			})*/
 		});
 	}
 

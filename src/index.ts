@@ -8,11 +8,11 @@ import * as Promise from 'bluebird';
 import Client from './client';
 
 class PocketSmith implements PocketSmithInterface {
-	
+
 	public Client: Client;
-	
-	public Accounts:Accounts;
-	public Categories:Categories;
+
+	public Accounts: Accounts;
+	public Categories: Categories;
 	public Me: Me = void 0;
 
 	constructor(public token: string) {
@@ -27,14 +27,12 @@ class PocketSmith implements PocketSmithInterface {
 	}
 
 	public init(): Promise<any> {
-		var self:PocketSmith = this;
-		
+		let self: PocketSmith = this;
+
 		return new Promise((resolve) => {
 			if (this.Me === void 0) {
-				((new Me(self)).init()).then((Me:Me) => {
-					
+				((new Me(self)).init()).then((Me: Me) => {
 					self.Me = Me;
-					
 					resolve(self);
 				});
 			} else {

@@ -1,8 +1,8 @@
 export interface PocketSmithInterface {
-	Client:any;
-	
+	Client: any;
+
 	Accounts: any;
-	Categories:any;
+	Categories: any;
 	Me: any;
 }
 
@@ -23,15 +23,15 @@ export interface MeInterface {
 }
 
 export interface CategoryInterface {
-	
+
 }
 
 export interface AccountInterface {
-	id: number,
-    title: string,
-    currency_code: string,
-    current_balance: number,
-    current_balance_date: string,
-    type: string,
-    is_net_worth: Boolean
+	id: number;
+	title: string;
+	currency_code: string;
+	current_balance: number;
+	current_balance_date: string;
+	type: string;
+	is_net_worth: Boolean;
 }

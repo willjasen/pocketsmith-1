@@ -3,9 +3,9 @@ import {PocketSmithInterface, MeInterface} from '../interfaces';
 
 export default class Me {
 	public data: MeInterface;
-	
-	constructor(private context:PocketSmithInterface) {
-		
+
+	constructor(private context: PocketSmithInterface) {
+
 	}
 
 	init(): Promise<any> {
@@ -14,6 +14,6 @@ export default class Me {
 				this.data = res;
 				resolve(this);
 			});
-		})
+		});
 	}
 }
