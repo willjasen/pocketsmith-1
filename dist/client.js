@@ -1,5 +1,5 @@
 "use strict";
-var Request = require('request');
+var Got = require('got');
 var Promise = require('bluebird');
 var Client = (function () {
     function Client(token) {
@@ -8,44 +8,25 @@ var Client = (function () {
     Client.prototype.resource = function (method, url, payload) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            Request({
+            Got("https://api.pocketsmith.com/v2/" + url, {
                 method: method,
-                url: "https://api.pocketsmith.com/v2/" + url,
+                json: true,
+                retries: 0,
                 headers: {
                     'Authorization': _this.token,
                     'Content-Type': 'application/json'
                 }
-            }, function (e, req, body) {
-                if (e != null) {
-                    reject(e);
-                }
-                else {
-                    var returns = void 0;
-                    try {
-                        returns = JSON.parse(body);
-                    }
-                    catch (e) {
-                        returns = body;
-                    }
-                    resolve(returns);
-                }
-            });
-        });
-    };
-    Client.prototype.frame = function (method, url) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.resource(method, url)
-                .then(function (resp) {
-                resolve(resp);
-            }, function (e) {
-                reject(e);
+            })
+                .then(function (response) {
+                resolve(response.body);
+            }, function (err) {
+                reject(err);
             });
         });
     };
     Client.prototype.get = function (url, callback) {
-        var prom = this.frame('GET', url);
-        if (callback) {
+        var prom = this.resource('GET', url);
+        if (!(callback === void 0)) {
             prom.then(function (resp) {
                 callback(resp);
             });
@@ -56,4 +37,4 @@ var Client = (function () {
 }());
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Client;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2NsaWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsSUFBWSxPQUFPLFdBQU0sU0FBUyxDQUFDLENBQUE7QUFDbkMsSUFBWSxPQUFPLFdBQU0sVUFBVSxDQUFDLENBQUE7QUFFcEM7SUFDQyxnQkFBb0IsS0FBWTtRQUFaLFVBQUssR0FBTCxLQUFLLENBQU87SUFBRyxDQUFDO0lBRTVCLHlCQUFRLEdBQWhCLFVBQWlCLE1BQWMsRUFBRSxHQUFXLEVBQUUsT0FBYTtRQUEzRCxpQkF5QkM7UUF4QkEsTUFBTSxDQUFDLElBQUksT0FBTyxDQUFDLFVBQUMsT0FBTyxFQUFFLE1BQU07WUFDbEMsT0FBTyxDQUFDO2dCQUNQLE1BQU0sRUFBRSxNQUFNO2dCQUNkLEdBQUcsRUFBRSxvQ0FBa0MsR0FBSztnQkFDNUMsT0FBTyxFQUFFO29CQUNSLGVBQWUsRUFBRSxLQUFJLENBQUMsS0FBSztvQkFDM0IsY0FBYyxFQUFFLGtCQUFrQjtpQkFDbEM7YUFDRCxFQUFFLFVBQUMsQ0FBQyxFQUFFLEdBQUcsRUFBRSxJQUFJO2dCQUNmLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQyxDQUFDO29CQUNmLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDWCxDQUFDO2dCQUFDLElBQUksQ0FBQyxDQUFDO29CQUNQLElBQUksT0FBTyxHQUFvQixLQUFLLENBQUMsQ0FBQztvQkFFdEMsSUFBSSxDQUFDO3dCQUNKLE9BQU8sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFBO29CQUMzQixDQUFFO29CQUFBLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7d0JBQ1osT0FBTyxHQUFHLElBQUksQ0FBQztvQkFDaEIsQ0FBQztvQkFFRCxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUM7Z0JBQ2xCLENBQUM7WUFDRixDQUFDLENBQUMsQ0FBQTtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0osQ0FBQztJQUVPLHNCQUFLLEdBQWIsVUFBYyxNQUFjLEVBQUUsR0FBVTtRQUF4QyxpQkFTQztRQVJBLE1BQU0sQ0FBQyxJQUFJLE9BQU8sQ0FBQyxVQUFDLE9BQU8sRUFBRSxNQUFNO1lBQ2xDLEtBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLEdBQUcsQ0FBQztpQkFDeEIsSUFBSSxDQUFDLFVBQUMsSUFBSTtnQkFDVixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDZixDQUFDLEVBQUUsVUFBQyxDQUFDO2dCQUNKLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNYLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDSixDQUFDO0lBRUQsb0JBQUcsR0FBSCxVQUFJLEdBQVcsRUFBRSxRQUFtQjtRQUNuQyxJQUFJLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUMsQ0FBQztRQUVsQyxFQUFFLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1lBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFDLElBQUk7Z0JBQ2QsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hCLENBQUMsQ0FBQyxDQUFDO1FBQ0osQ0FBQztRQUVELE1BQU0sQ0FBQyxJQUFJLENBQUM7SUFDYixDQUFDO0lBQ0YsYUFBQztBQUFELENBQUMsQUFwREQsSUFvREM7QUFFRDtrQkFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2NsaWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsSUFBWSxHQUFHLFdBQU0sS0FBSyxDQUFDLENBQUE7QUFDM0IsSUFBWSxPQUFPLFdBQU0sVUFBVSxDQUFDLENBQUE7QUFFcEM7SUFDQyxnQkFBb0IsS0FBYTtRQUFiLFVBQUssR0FBTCxLQUFLLENBQVE7SUFBSSxDQUFDO0lBRTlCLHlCQUFRLEdBQWhCLFVBQWlCLE1BQWMsRUFBRSxHQUFXLEVBQUUsT0FBYTtRQUEzRCxpQkFvQkM7UUFuQkEsTUFBTSxDQUFDLElBQUksT0FBTyxDQUFDLFVBQUMsT0FBTyxFQUFFLE1BQU07WUFDbEMsR0FBRyxDQUFDLG9DQUFrQyxHQUFLLEVBQUU7Z0JBQzVDLE1BQU0sRUFBRSxNQUFNO2dCQUNkLElBQUksRUFBRSxJQUFJO2dCQUNWLE9BQU8sRUFBRSxDQUFDO2dCQUNWLE9BQU8sRUFBRTtvQkFDUixlQUFlLEVBQUUsS0FBSSxDQUFDLEtBQUs7b0JBQzNCLGNBQWMsRUFBRSxrQkFBa0I7aUJBQ2xDO2FBQ0QsQ0FBQztpQkFDQSxJQUFJLENBQUMsVUFBQSxRQUFRO2dCQUNiLE9BQU8sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDeEIsQ0FBQyxFQUFFLFVBQUEsR0FBRztnQkFDTCxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUE7WUFDWixDQUFDLENBQUMsQ0FBQTtRQUlKLENBQUMsQ0FBQyxDQUFDO0lBQ0osQ0FBQztJQUVELG9CQUFHLEdBQUgsVUFBSSxHQUFXLEVBQUUsUUFBbUI7UUFDbkMsSUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFFckMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLFFBQVEsS0FBSyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUM1QixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQUMsSUFBSTtnQkFDZCxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEIsQ0FBQyxDQUFDLENBQUM7UUFDSixDQUFDO1FBRUQsTUFBTSxDQUFDLElBQUksQ0FBQztJQUNiLENBQUM7SUFDRixhQUFDO0FBQUQsQ0FBQyxBQXBDRCxJQW9DQztBQUVEO2tCQUFlLE1BQU0sQ0FBQyJ9

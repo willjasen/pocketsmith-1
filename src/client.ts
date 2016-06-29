@@ -1,51 +1,35 @@
-import * as Request from 'request';
+import * as Got from 'got';
 import * as Promise from 'bluebird';
 
 class Client {
-	constructor(private token:string) {}
+	constructor(private token: string) { }
 
 	private resource(method: string, url: string, payload?: any): Promise<any> {
 		return new Promise((resolve, reject) => {
-			Request({
+			Got(`https://api.pocketsmith.com/v2/${url}`, {
 				method: method,
-				url: `https://api.pocketsmith.com/v2/${url}`,
+				json: true,
+				retries: 0,
 				headers: {
 					'Authorization': this.token,
 					'Content-Type': 'application/json'
 				}
-			}, (e, req, body) => {
-				if (e != null) {
-					reject(e);
-				} else {
-					let returns: Object | string = void 0;
-
-					try {
-						returns = JSON.parse(body)
-					} catch (e) {
-						returns = body;
-					}
-
-					resolve(returns);
-				}
 			})
-		});
-	}
-
-	private frame(method: string, url:string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this.resource(method, url)
-				.then((resp) => {
-					resolve(resp);
-				}, (e) => {
+				.then(response => {
+					resolve(response.body);
+				}, err => {
+					reject(err)
+				})
+				/*.catch(e => {
 					reject(e);
-				});
+				})*/
 		});
 	}
 
 	get(url: string, callback?: Function): Promise<any> {
-		let prom = this.frame('GET', url);
+		let prom = this.resource('GET', url);
 
-		if (callback) {
+		if (!(callback === void 0)) {
 			prom.then((resp) => {
 				callback(resp);
 			});
