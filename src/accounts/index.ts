@@ -20,6 +20,7 @@ export default class Accounts {
 		return this.context.Client.get(`institutions/${institutionId}/accounts`, callback);
 	}
 
+	// -- In `me` context --
 	getAll(callback?: Function): Promise<Array<AccountInterface>> {
 		if (this.context.Me) {
 			return this.getAllByUser(this.context.Me.data.id, callback);

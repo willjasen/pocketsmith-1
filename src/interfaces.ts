@@ -1,9 +1,17 @@
-export interface PocketSmithInterface {
-	Client: any;
+import Accounts from './accounts';
+import Categories from './categories';
+import Users from './users';
+import Me from './me';
 
-	Accounts: any;
-	Categories: any;
-	Me: any;
+import Client from './client';
+
+export interface PocketSmithInterface {
+	Client: Client;
+
+	Accounts: Accounts;
+	Categories: Categories;
+	Users: Users;
+	Me: Me;
 }
 
 export interface MeInterface {
