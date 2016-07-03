@@ -1,6 +1,8 @@
 import * as Promise from 'bluebird';
 import {PocketSmithInterface, AccountInterface} from '../interfaces';
 
+import {NotInMeContext} from '../exceptions';
+
 export default class Accounts {
 	constructor(private context: PocketSmithInterface) {
 
@@ -22,7 +24,7 @@ export default class Accounts {
 		if (this.context.Me) {
 			return this.getAllByUser(this.context.Me.data.id, callback);
 		} else {
-			throw new Error('PocketSmith: Please init a `me` PocketSmith inistance. Eg: (new PocketSmith(\'token\')).init().then(() => { ... })');
+			throw NotInMeContext();
 		}
 	}
 }
