@@ -20,9 +20,6 @@ class Client {
 				}, err => {
 					reject(err);
 				});
-			/*.catch(e => {
-				reject(e);
-			})*/
 		});
 	}
 

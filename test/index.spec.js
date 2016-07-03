@@ -11,7 +11,7 @@ var methods = [
 	'Accounts',
 	'Categories',
 	//'Institutions',
-	//'Users',
+	'Users',
 	//'Transactions',
 	//'Scenarios',
 	'init'

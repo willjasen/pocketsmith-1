@@ -35,3 +35,19 @@ export interface AccountInterface {
 	type: string;
 	is_net_worth: Boolean;
 }
+
+export interface UserInterface {
+	id: number;
+	login: string;
+	name: string;
+	email: string;
+	avatar_url: string;
+	beta_user: boolean;
+	time_zone: string;
+	week_start_day: number;
+	base_currency_code: string;
+	always_show_base_currency: boolean;
+	using_multiple_currencies: boolean;
+	created_at: string;
+	updated_at: string;
+}
