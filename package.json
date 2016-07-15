@@ -1,6 +1,6 @@
 {
   "name": "pocketsmith",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "PocketSmith api wrapper for Node.",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.spec.js)",
     "test-watch": "NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.spec.js) --watch",
     "compile": "rimraf dist/* && tsc",
-	"check-release": "npm run compile && npm run lint && npm run test"
+    "check-release": "npm run compile && npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
