@@ -4,10 +4,12 @@
   "description": "PocketSmith api wrapper for Node.",
   "main": "dist/index.js",
   "scripts": {
+    "setup": "npm i -g typescript typings && npm i && typings i",
     "lint": "tslint -t verbose -c tslint.json $(find ./src -name *.ts)",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.spec.js)",
     "test-watch": "NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.spec.js) --watch",
-    "compile": "rimraf dist/* && tsc"
+    "compile": "rimraf dist/* && tsc",
+	"check-release": "npm run compile && npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -35,7 +37,7 @@
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "nock": "^8.0.0",
-    "rimraf": "^2.5.2",
+    "rimraf": "^2.5.3",
     "tslint": "^3.13.0",
     "typescript": "^1.8.10"
   }

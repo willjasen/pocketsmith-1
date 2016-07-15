@@ -3,6 +3,7 @@ import {PocketSmithInterface} from './interfaces';
 import Accounts from './accounts';
 import Categories from './categories';
 import Users from './users';
+import Transactions from './transactions';
 import Me from './me';
 
 import * as Promise from 'bluebird';
@@ -15,6 +16,7 @@ class PocketSmith implements PocketSmithInterface {
 	public Accounts: Accounts;
 	public Categories: Categories;
 	public Users: Users;
+	public Transactions: Transactions;
 	public Me: Me = void 0;
 
 	constructor(public token: string) {
@@ -27,6 +29,7 @@ class PocketSmith implements PocketSmithInterface {
 		this.Accounts = new Accounts(this);
 		this.Categories = new Categories(this);
 		this.Users = new Users(this);
+		this.Transactions = new Transactions(this);
 	}
 
 	public init(): Promise<any> {

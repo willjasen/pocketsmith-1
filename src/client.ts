@@ -10,6 +10,7 @@ class Client {
 				method: method,
 				json: true,
 				retries: 0,
+				query: payload || void 0,
 				headers: {
 					'Authorization': this.token,
 					'Content-Type': 'application/json'
@@ -23,8 +24,8 @@ class Client {
 		});
 	}
 
-	get(url: string, callback?: Function): Promise<any> {
-		let prom = this.resource('GET', url);
+	get(url: string, callback?: Function, payload?: any): Promise<any> {
+		let prom = this.resource('GET', url, payload);
 
 		if (!(callback === void 0)) {
 			prom.then((resp) => {

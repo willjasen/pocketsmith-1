@@ -1,6 +1,7 @@
 import Accounts from './accounts';
 import Categories from './categories';
 import Users from './users';
+import Transactions from './transactions';
 import Me from './me';
 
 import Client from './client';
@@ -11,6 +12,7 @@ export interface PocketSmithInterface {
 	Accounts: Accounts;
 	Categories: Categories;
 	Users: Users;
+	Transactions: Transactions;
 	Me: Me;
 }
 
@@ -58,4 +60,12 @@ export interface UserInterface {
 	using_multiple_currencies: boolean;
 	created_at: string;
 	updated_at: string;
+}
+
+export interface TransQueryInterface {
+	page?: number;
+	start_date?: string;
+	end_date?: string;
+	only_uncategorised?: number;
+	type?: string;
 }
