@@ -9,18 +9,19 @@ cache:
     - node_modules
     - typings
 
+before_install:
+  - npm i yarn typings -g
+
 install:
-  - npm i typings rimraf
-  - npm i
+  - yarn
   - typings i
 
 before_script:
-  - npm prune
-  - npm run compile
+  - yarn compile
 
 script:
-  - npm run lint
-  - npm test
+  - yarn lint
+  - yarn test
   - cat ./coverage/lcov.info | ./node_modules/.bin/codecov
 
 branches:
