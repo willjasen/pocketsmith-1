@@ -6,7 +6,7 @@
   "scripts": {
     "setup": "npm i -g typescript typings && npm i && typings i",
     "lint": "tslint -t verbose -c tslint.json $(find ./src -name *.ts)",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.spec.js)",
+    "test": "nyc ./node_modules/mocha/bin/_mocha $(find ./test -name *.spec.js)",
     "test-watch": "NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.spec.js) --watch",
     "compile": "rimraf dist/* && tsc",
     "check-release": "npm run compile && npm run lint && npm run test"
@@ -32,15 +32,15 @@
     "got": "^6.3.0"
   },
   "devDependencies": {
-    "bluebird": "^3.4.6",
+    "bluebird": "^3.4.7",
     "chai": "^3.5.0",
     "codecov": "^1.0.1",
-    "got": "^6.5.0",
+    "got": "^6.7.1",
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.2",
-    "nock": "^8.1.0",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.2",
     "rimraf": "^2.5.4",
-    "tslint": "^3.15.1",
-    "typescript": "^2.0.3"
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.5"
   }
 }

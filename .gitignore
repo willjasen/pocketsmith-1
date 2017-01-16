@@ -1,4 +1,5 @@
-/node_modules/
-/coverage/
-/typings/
-*.log
+node_modules/
+coverage/
+typings/
+.nyc_output/
+*.log*
