@@ -19,8 +19,3 @@ script:
   - yarn lint
   - yarn test
   - nyc report -r=text-lcov | ./node_modules/.bin/codecov
-
-branches:
-  only:
-    - master
-    - /^greenkeeper/.*$/
