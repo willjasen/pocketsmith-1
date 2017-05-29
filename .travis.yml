@@ -13,7 +13,7 @@ install:
   - yarn --pure-lockfile
 
 before_script:
-  - yarn compile
+  - yarn build
 
 script:
   - yarn lint
